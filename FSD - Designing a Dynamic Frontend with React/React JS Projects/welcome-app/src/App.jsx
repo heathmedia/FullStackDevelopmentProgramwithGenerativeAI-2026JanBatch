@@ -12,11 +12,17 @@ function ButtonComponent() {
 }
 
 function EmployeeComponent() {
-  let name = "Akash";       // JS Code 
-
+  let id = 100;       // number type 
+  let name = "Akash";       // string type  
+  let isActive = true;      // boolean 
+  let skillSet = ["Java", "React JS", "Angular", "Node JS"];  // array type 
   return(
     <div>
-        <p>My Name is {name}</p>
+      <h2>Employee Details</h2>
+      <p>ID: {id}</p>
+      <p>Name: {name}</p>
+      <p>Active: {isActive ? "Yes" : "No" }</p>  
+      <p>Skills: {skillSet.join(", ")}</p>
     </div>
   )
 }
