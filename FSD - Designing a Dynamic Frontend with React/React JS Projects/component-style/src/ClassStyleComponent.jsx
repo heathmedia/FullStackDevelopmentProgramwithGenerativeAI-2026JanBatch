@@ -5,12 +5,14 @@ class ClassStyleComponent extends Component{    // inheritance
             this.name= "Steven";    // normal variable part of class not react component
             this.state = {msg: "Class Style Component"}   // state variable  
     }
+    
     changeMsg = () => {
        // console.log("Message before change : ", this.state.msg);
        // this.state.msg = "Welcome to React JS";   // normal variable change but it will not reflect in UI because it is not part of react component
        //console.log("Message after change : ", this.state.msg);
         this.setState({msg: "Welcome to React JS"})   // method to update the state variable
     }
+
     changeName = ()=> {
         console.log("Name before change : ", this.name);
         this.name = "Bruce";
