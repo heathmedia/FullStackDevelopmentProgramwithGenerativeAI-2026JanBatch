@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 export const URL="http://localhost:3000/products";
 
 function ProductOperation(){
+
 let [products,setProducts]=useState([]);
 let [error,setError]=useState("")
 let [product,setProduct]=useState({pname:"",price:"",qty:""});
 let [msg,setMessage]=useState("");
+
 // 1st option without dependencies  it call first time and again whenever re-render it call again and again. 
 // useEffect(()=> 
 //     console.log("useEffect get called. ")
@@ -58,6 +60,12 @@ let storeProduct = async (event)=> {
     }
     setProduct({pname:"",price:"",qty:""});
 }
+
+let deleteProduct = async (pid)=> {
+    setMessage(""); // reset
+    let result = await axios.delete(URL+"/"+pid);   // appending id through URL 
+    setMessage(result.statusText);
+}
     return(
         <div>
             <span style={{color:"red"}}>{msg}</span>
@@ -85,6 +93,7 @@ let storeProduct = async (event)=> {
                         <th>PName</th>
                         <th>Price</th>
                         <th>Qty</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,6 +104,11 @@ let storeProduct = async (event)=> {
                                     <td>{product.pname}</td>
                                     <td>{product.price}</td>
                                     <td>{product.qty}</td>
+                                    <td>
+                                        <input type="button"
+                                        value="Delete"
+                                        onClick={()=>deleteProduct(product.id)}/>
+                                    </td>
                             </tr>
                         )
                     }
