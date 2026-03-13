@@ -15,7 +15,7 @@ const [user1Value,setUser1Value]=useState();
         <div style={{"backgroundColor":"gray","color":"white"}}>
             <h3>Parent Component</h3>
             <p>Parent emailId is in parent components is {admin}</p>
-        <Child1 parentName={admin} age="21" passValueToParent={(data)=>user1Value(data)}></Child1>
+        <Child1 parentName={admin} age="21" passValueToParent={(data)=>setUser1Value(data)}></Child1>
         <Child2 pName={admin} designation="Manager" child1Value={user1Value}></Child2>
             <p>Parent emailId is in parent components is {admin}</p>
             <p>In parent component child1 value is {user1Value}</p>
