@@ -20,7 +20,6 @@ let handleSubmit = (event)=> {
 }
     return(
         <div>
-
             {
                 obj.user
                 ?
