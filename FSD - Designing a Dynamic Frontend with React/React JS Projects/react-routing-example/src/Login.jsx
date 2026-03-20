@@ -6,6 +6,13 @@ const [emailId,setEmailId]=useState("");
 const [password,setPassword]=useState("");
 const [error,setError]=useState("");
 const navigate = useNavigate();
+// in memory DB. 
+let userDb =[
+    {emailId:"raj@gmail.com",password:"raj@123"},
+    {emailId:"steven@gmail.com",password:"steven@123"},
+    {emailId:"bob@gmail.com",password:"bob@123"},
+    {emailId:"ajay@gmail.com",password:"ajay@123"}
+]
 let handleSubmit  = (event)=> {
     event.preventDefault();
     setError("");
@@ -13,10 +20,21 @@ let handleSubmit  = (event)=> {
         setError("All field required")
         return;
     }
+    // check with single user 
+    // if(emailId==="admin@gmail.com" && password==="123"){
+    //         alert("successfully login")
+    //         navigate("/home");
+    // }else {
+    //     setError("EmailId or password is wrong")
+    // }
 
-    if(emailId==="admin@gmail.com" && password==="123"){
-            alert("successfully login")
-            navigate("/home");
+    // check with multi users 
+
+    let result = userDb.find(user=>user.emailId===emailId && user.password===password);
+    if(result!=undefined){
+        alert("successfully login")
+        sessionStorage.setItem("user",result.emailId);
+        navigate("/home");
     }else {
         setError("EmailId or password is wrong")
     }
