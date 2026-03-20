@@ -5,7 +5,7 @@ const MySlice = createSlice({
         n:100,
         name:"Akash"
     },
-    reducers:{
+    reducers:{  // which contains action functions which take state and action objects. 
         increment:(state)=> {
             state.n= state.n+1;
         },
