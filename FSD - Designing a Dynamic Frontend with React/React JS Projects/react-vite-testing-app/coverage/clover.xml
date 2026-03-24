@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1774313174423" clover="3.2.0">
+  <project timestamp="1774313174423" name="All files">
+    <metrics statements="15" coveredstatements="15" conditionals="8" coveredconditionals="8" methods="5" coveredmethods="5" elements="28" coveredelements="28" complexity="0" loc="15" ncloc="15" packages="1" files="2" classes="2"/>
+    <file name="Hello.jsx" path="D:\Desktop\Full Stack Development Program with Generative AI  - 2026 Batch\FSD - Designing a Dynamic Frontend with React\React JS Projects\react-vite-testing-app\src\Hello.jsx">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="4" count="1" type="stmt"/>
+    </file>
+    <file name="Login.jsx" path="D:\Desktop\Full Stack Development Program with Generative AI  - 2026 Batch\FSD - Designing a Dynamic Frontend with React\React JS Projects\react-vite-testing-app\src\Login.jsx">
+      <metrics statements="14" coveredstatements="14" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
+      <line num="4" count="60" type="stmt"/>
+      <line num="5" count="60" type="stmt"/>
+      <line num="6" count="60" type="stmt"/>
+      <line num="9" count="60" type="stmt"/>
+      <line num="10" count="3" type="stmt"/>
+      <line num="12" count="3" type="cond" truecount="4" falsecount="0"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="17" count="2" type="cond" truecount="4" falsecount="0"/>
+      <line num="18" count="1" type="stmt"/>
+      <line num="20" count="1" type="stmt"/>
+      <line num="23" count="60" type="stmt"/>
+      <line num="29" count="30" type="stmt"/>
+      <line num="32" count="23" type="stmt"/>
+    </file>
+  </project>
+</coverage>
