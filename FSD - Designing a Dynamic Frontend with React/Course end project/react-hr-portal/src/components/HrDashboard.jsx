@@ -1,28 +1,37 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import "./HrDashboard.css";
 
 function HrDashboard() {
 
 let navigate = useNavigate();
 
 let logout = ()=> {
-    navigate("/")
+    navigate("/");
 }
 
-    return(
-        <>
-            <div>   <h3>Hr Home Page</h3>
+return(
+    <div className="dashboard-container">
 
-                <input type="button" value="logout" onClick={logout}/>
-                <br/>
-                <Link to="addEmployee">Add Employee</Link> |
-                <Link to="viewEmployees">View Employees</Link> |
-                <hr/>
+        {/* Header */}
+        <div className="dashboard-header">
+            <h2>HR Dashboard</h2>
+            <button className="logout-btn" onClick={logout}>Logout</button>
+        </div>
 
-                <Outlet/>
+        {/* Navigation */}
+        <div className="dashboard-nav">
+            <Link to="addEmployee">Add Employee</Link>
+            <Link to="viewEmployees">View Employees</Link>
+            <Link to="viewAllLeaveInfo">Leave Info</Link>
+        </div>
 
-            </div>
-        </>
-    )
+        {/* Content Area */}
+        <div className="dashboard-content">
+            <Outlet/>
+        </div>
+
+    </div>
+)
 }
 
 export default HrDashboard;

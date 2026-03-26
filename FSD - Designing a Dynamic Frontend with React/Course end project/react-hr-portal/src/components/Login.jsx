@@ -1,70 +1,115 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
 let [emailId,setEmailId]=useState("");
 let [password,setPassword]=useState("");
 let [typeOfUser,setTypeOfUser]=useState("");
 let [msg,setMsg]=useState("");
+
 let LOGIN_URL="http://localhost:3000/logins";
 let navigate = useNavigate();
+
 let signIn = async(event)=> {
     setMsg("")
     event.preventDefault();
-    if(emailId.length==0 || password.length==0){
-        setMsg("All field are required")
+
+    if(emailId.length===0 || password.length===0){
+        setMsg("All fields are required");
         return;
     }
 
-    let login  = {emailId,password,typeOfUser}
-    //console.log(login);
+    let login  = {emailId,password,typeOfUser};
+
     let loginDb = await axios.get(LOGIN_URL);
-    console.log(loginDb.data)
-    let result = loginDb.data.find(ll=>ll.emailId==login.emailId && ll.password===login.password && ll.typeOfUser===login.typeOfUser)
-    if(result==undefined){
-            setMsg("Invalid EmailId or password or typeof user wrong")
-    }else {
-           if(login.typeOfUser==="hr"){
-            alert("hr Login successfully")
-            navigate("/hrHome")
-           } else if(login.typeOfUser==="employee"){
+
+    let result = loginDb.data.find(ll =>
+        ll.emailId===login.emailId &&
+        ll.password===login.password &&
+        ll.typeOfUser===login.typeOfUser
+    );
+
+    if(result===undefined){
+        setMsg("Invalid EmailId / Password / User Type");
+    } else {
+        if(login.typeOfUser==="hr"){
+            alert("HR Login successful");
+            navigate("/hrHome");
+        } else if(login.typeOfUser==="employee"){
             sessionStorage.setItem("emailId",login.emailId);
-            alert("employee login successfully")
-            navigate("/employeeHome")
-           }
+            alert("Employee login successful");
+            navigate("/employeeHome");
+        }
     }
-    setEmailId("")
+
+    setEmailId("");
     setPassword("");
-}
-    return(
-        <>
-            <h3>Login Page</h3>
-            <form onSubmit={signIn}>
-                <label>EmailId</label>
-                <input type="email" name="emailId" 
-                value={emailId} onChange={(event)=>setEmailId(event.target.value)}/><br/>
+};
 
-                <label>Password</label>
-                <input type="password" name="password" 
-                value={password} onChange={(event)=>setPassword(event.target.value)}/><br/>
+return(
+    <div className="login-container">
+        <div className="login-card">
+            <h2 className="login-title">Login</h2>
 
-                <label>TypeOfUser</label>
-                <input type="radio" name="typeOfUser" 
-                value="hr" onChange={(event)=>setTypeOfUser(event.target.value)}/>:Hr
-                <input type="radio" name="typeOfUser" 
-                value="employee" onChange={(event)=>setTypeOfUser(event.target.value)}/>:Employee
-                <br/>
+            <form onSubmit={signIn} className="login-form">
 
-                <input type="submit" value="SignIn"/>
+                <div className="form-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        value={emailId}
+                        onChange={(e)=>setEmailId(e.target.value)}
+                        placeholder="Enter email"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
+                        placeholder="Enter password"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>User Type</label>
+                    <div className="radio-group">
+                        <label>
+                            <input
+                                type="radio"
+                                value="hr"
+                                name="typeOfUser"
+                                onChange={(e)=>setTypeOfUser(e.target.value)}
+                            /> HR
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                value="employee"
+                                name="typeOfUser"
+                                onChange={(e)=>setTypeOfUser(e.target.value)}
+                            /> Employee
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" className="login-btn">Sign In</button>
 
             </form>
-            <Link to="signUp">SignUp</Link>
 
-            <span style={{"color":"red"}}>{msg}</span>
-        </>
-    )
+            <p className="signup-text">
+                Don't have an account? <Link to="signUp">Sign Up</Link>
+            </p>
+
+            {msg && <p className="error-msg">{msg}</p>}
+        </div>
+    </div>
+);
 }
-
 
 export default Login;

@@ -1,102 +1,143 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import "./SignUp.css";
+
 function SignUp() {
+
 let [emailId,setEmailId]=useState("");
 let [department,setDepartment]=useState("");
 let [age,setAge]=useState("");
 let [password,setPassword]=useState("");
 let [id,setId]=useState("");
 let [flag,setFlag]=useState(true);
+let [msg,setMsg]=useState("");
+
 let EMPLOYEE_URL="http://localhost:3000/employees";
 let LOGIN_URL="http://localhost:3000/logins";
 
+/* Step 1: Verify Email */
 let verifyEmailId = async(event)=> {
     event.preventDefault();
+    setMsg("");
+
     let employees = await axios.get(EMPLOYEE_URL);
-    let employeePresent = employees.data.find(employee=>employee.emailId===emailId);
-    if(employeePresent==undefined){
-        alert("You are not a part of an organization")
+
+    let employeePresent = employees.data.find(
+        employee => employee.emailId === emailId
+    );
+
+    if(employeePresent===undefined){
+        setMsg("❌ You are not part of the organization");
         setEmailId("");
-    }else {
-        console.log(employeePresent)
+    } else {
         setFlag(false);
         setId(employeePresent.id);
         setDepartment(employeePresent.department);
         setEmailId(employeePresent.emailId);
     }
-    
 }
+
+/* Step 2: Complete Signup */
 let signUp = async (event)=> {
     event.preventDefault();
+    setMsg("");
+
+    if(password==="" || age===""){
+        setMsg("All fields are required ❌");
+        return;
+    }
+
     let existingEmployee = {emailId,password,department,age};
     let loginDetails = {emailId,password,typeOfUser:"employee"};
-    console.log(existingEmployee);
-    await axios.patch(EMPLOYEE_URL+"/"+id,existingEmployee);// it update existing employee details 
-    // with new property as age and password. 
+
+    await axios.patch(EMPLOYEE_URL+"/"+id,existingEmployee);
     await axios.post(LOGIN_URL,loginDetails);
-    alert("Sign Up Done Successfully")
+
+    setMsg("✅ Sign Up Successful");
+
     setFlag(true);
     setEmailId("");
     setDepartment("");
     setPassword("");
-    setAge("")
+    setAge("");
 }
-    return(
-        <>
-            <h3>SignUp Page</h3>
 
-            {
-                flag
-                
-                ?
-                
-                <div>
-                    <form onSubmit={verifyEmailId}>
-                    <label>Enter registered EmailId</label>
-                    <input type="email" name="emailId" value={emailId}
-                    onChange={(event)=>setEmailId(event.target.value)}/>
-                    <input type="submit" value="Verify EmailId"/>
-                    </form>    
-                </div>
+return(
+    <div className="signup-container">
 
-                :
+        <div className="signup-card">
+            <h2>Employee Sign Up</h2>
 
-                <div>
-                    
-                    <form onSubmit={signUp}>
-                    
-                    <label>EmailId</label>
-                    <input type="email" name="emailId" value={emailId}
-                    onChange={(event)=>setEmailId(event.target.value)} readOnly/>
+            {flag ? (
+                /* STEP 1 */
+                <form onSubmit={verifyEmailId}>
 
-                    <br/>
+                    <div className="form-group">
+                        <label>Registered Email</label>
+                        <input
+                            type="email"
+                            value={emailId}
+                            onChange={(e)=>setEmailId(e.target.value)}
+                            placeholder="Enter your company email"
+                        />
+                    </div>
 
-                    <label>Password</label>
-                    <input type="password" name="password" value={password}
-                    onChange={(event)=>setPassword(event.target.value)}/>
+                    <button className="signup-btn">
+                        Verify Email
+                    </button>
 
-                    <br/>
+                </form>
+            ) : (
+                /* STEP 2 */
+                <form onSubmit={signUp}>
 
-                    <label>Department</label>
-                    <input type="text" name="department" value={department}
-                    onChange={(event)=>setDepartment(event.target.value)} readOnly/>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input type="email" value={emailId} readOnly />
+                    </div>
 
-                    <br/>
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
+                            placeholder="Enter password"
+                        />
+                    </div>
 
+                    <div className="form-group">
+                        <label>Department</label>
+                        <input type="text" value={department} readOnly />
+                    </div>
 
-                    <label>Age</label>
-                    <input type="text" name="age" value={age}
-                    onChange={(event)=>setAge(event.target.value)}/>
+                    <div className="form-group">
+                        <label>Age</label>
+                        <input
+                            type="number"
+                            value={age}
+                            onChange={(e)=>setAge(e.target.value)}
+                            placeholder="Enter age"
+                        />
+                    </div>
 
-                    <br/>
-                    <input type="submit" value="SignUp"/>
-                    </form>    
-                </div>
-            }
-            <Link to="/">SignIn</Link>
-        </>
-    )
+                    <button className="signup-btn">
+                        Complete Sign Up
+                    </button>
+
+                </form>
+            )}
+
+            {msg && <p className="message">{msg}</p>}
+
+            <p className="signin-link">
+                Already have an account? <Link to="/">Sign In</Link>
+            </p>
+
+        </div>
+    </div>
+)
 }
 
 export default SignUp;
