@@ -14,7 +14,8 @@ let logout = ()=> {
 
                 <input type="button" value="logout" onClick={logout}/>
                 <br/>
-                <Link to="addEmployee">Add Employee</Link>
+                <Link to="addEmployee">Add Employee</Link> |
+                <Link to="viewEmployees">View Employees</Link> |
                 <hr/>
 
                 <Outlet/>

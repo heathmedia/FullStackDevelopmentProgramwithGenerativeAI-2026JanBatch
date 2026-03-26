@@ -17,6 +17,11 @@
       "id": "2a2c",
       "emailId": "Alice@gmail.com",
       "department": "Non-IT"
+    },
+    {
+      "id": "c61c",
+      "emailId": "Charlie@gmail.com",
+      "department": "Marketing"
     }
   ],
   "leaveInformation": [],
