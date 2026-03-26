@@ -7,7 +7,6 @@ let [department,setDepartment]=useState("");
 let [age,setAge]=useState("");
 let [password,setPassword]=useState("");
 let [id,setId]=useState("");
-
 let [flag,setFlag]=useState(true);
 let EMPLOYEE_URL="http://localhost:3000/employees";
 let LOGIN_URL="http://localhost:3000/logins";
@@ -17,7 +16,7 @@ let verifyEmailId = async(event)=> {
     let employees = await axios.get(EMPLOYEE_URL);
     let employeePresent = employees.data.find(employee=>employee.emailId===emailId);
     if(employeePresent==undefined){
-        alert("You are not a part of organization")
+        alert("You are not a part of an organization")
         setEmailId("");
     }else {
         console.log(employeePresent)
@@ -28,7 +27,6 @@ let verifyEmailId = async(event)=> {
     }
     
 }
-
 let signUp = async (event)=> {
     event.preventDefault();
     let existingEmployee = {emailId,password,department,age};
@@ -37,8 +35,12 @@ let signUp = async (event)=> {
     await axios.patch(EMPLOYEE_URL+"/"+id,existingEmployee);// it update existing employee details 
     // with new property as age and password. 
     await axios.post(LOGIN_URL,loginDetails);
+    alert("Sign Up Done Successfully")
     setFlag(true);
     setEmailId("");
+    setDepartment("");
+    setPassword("");
+    setAge("")
 }
     return(
         <>

@@ -29,7 +29,9 @@ let signIn = async(event)=> {
             alert("hr Login successfully")
             navigate("/hrHome")
            } else if(login.typeOfUser==="employee"){
+            sessionStorage.setItem("emailId",login.emailId);
             alert("employee login successfully")
+            navigate("/employeeHome")
            }
     }
     setEmailId("")

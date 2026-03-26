@@ -11,6 +11,12 @@
       "emailId": "Bob@gmail.com",
       "password": "bob@123",
       "typeOfUser": "employee"
+    },
+    {
+      "id": "1da2",
+      "emailId": "Alice@gmail.com",
+      "password": "alice@123",
+      "typeOfUser": "employee"
     }
   ],
   "employees": [
@@ -24,7 +30,9 @@
     {
       "id": "2a2c",
       "emailId": "Alice@gmail.com",
-      "department": "Non-IT"
+      "department": "Non-IT",
+      "password": "alice@123",
+      "age": "38"
     },
     {
       "id": "c61c",

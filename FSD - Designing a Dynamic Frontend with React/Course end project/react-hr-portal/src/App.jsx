@@ -5,6 +5,7 @@ import HrDashboard from "./components/HrDashboard"
 import EmployeeDashboard from "./components/EmployeeDashboard"
 import AddEmployee from "./components/AddEmployee"
 import ViewAllEmployees from "./components/ViewAllEmployees"
+import EmployeeView from "./components/EmployeeView"
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
         </Route>
  
         <Route path="employeeHome" element={<EmployeeDashboard/>}>
-
+          <Route path="viewEmployee" element={<EmployeeView/>}></Route>
         </Route>
 
       </Routes>  
