@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom"
-import Login from "./Login"
-import SignUp from "./SignUp"
-import HrDashboard from "./HrDashboard"
-import EmployeeDashboard from "./EmployeeDashboard"
+import Login from "./components/Login"
+import SignUp from "./components/SignUp"
+import HrDashboard from "./components/HrDashboard"
+import EmployeeDashboard from "./components/EmployeeDashboard"
+import AddEmployee from "./components/AddEmployee"
 
 function App() {
 
@@ -17,8 +18,15 @@ function App() {
       <Routes>
         <Route path="" element={<Login/>}/> 
         <Route path="signUp" element={<SignUp/>}/> 
-        <Route path="hrHome" element={<HrDashboard/>}/> 
-        <Route path="employeeHome" element={<EmployeeDashboard/>}/>  
+
+        <Route path="hrHome" element={<HrDashboard/>}>
+          <Route path="addEmployee" element={<AddEmployee/>}></Route>
+        </Route>
+ 
+        <Route path="employeeHome" element={<EmployeeDashboard/>}>
+
+        </Route>
+
       </Routes>  
     </>
   )

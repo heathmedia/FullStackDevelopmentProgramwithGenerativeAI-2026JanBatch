@@ -1,11 +1,24 @@
 {
-    "logins":[
-        {"emailId":"hr@gmail.com","password":"hr@123","typeOfUser":"hr"}
-    ],
-    "employees":[
-
-    ],
-    "leaveInformation": [
-
-    ]
+  "logins": [
+    {
+      "emailId": "hr@gmail.com",
+      "password": "hr@123",
+      "typeOfUser": "hr",
+      "id": "2299"
+    }
+  ],
+  "employees": [
+    {
+      "id": "4f29",
+      "emailId": "Bob@gmail.com",
+      "department": "IT"
+    },
+    {
+      "id": "2a2c",
+      "emailId": "Alice@gmail.com",
+      "department": "Non-IT"
+    }
+  ],
+  "leaveInformation": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
