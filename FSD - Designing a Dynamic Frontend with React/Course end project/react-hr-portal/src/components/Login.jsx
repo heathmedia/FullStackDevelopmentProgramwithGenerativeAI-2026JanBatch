@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
 let [emailId,setEmailId]=useState("");
@@ -57,6 +57,8 @@ let signIn = async(event)=> {
                 <input type="submit" value="SignIn"/>
 
             </form>
+            <Link to="signUp">SignUp</Link>
+
             <span style={{"color":"red"}}>{msg}</span>
         </>
     )

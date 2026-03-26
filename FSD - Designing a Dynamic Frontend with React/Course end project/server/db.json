@@ -5,13 +5,21 @@
       "password": "hr@123",
       "typeOfUser": "hr",
       "id": "2299"
+    },
+    {
+      "id": "1354",
+      "emailId": "Bob@gmail.com",
+      "password": "bob@123",
+      "typeOfUser": "employee"
     }
   ],
   "employees": [
     {
       "id": "4f29",
       "emailId": "Bob@gmail.com",
-      "department": "IT"
+      "department": "IT",
+      "password": "bob@123",
+      "age": "34"
     },
     {
       "id": "2a2c",
