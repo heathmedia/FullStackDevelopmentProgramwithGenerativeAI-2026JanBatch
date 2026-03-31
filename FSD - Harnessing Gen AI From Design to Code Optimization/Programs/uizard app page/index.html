@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PantryPal</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f6f6f6;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar h1 {
+    font-size: 22px;
+}
+
+.nav-links span {
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.sidebar h3 {
+    margin-bottom: 10px;
+}
+
+.sidebar label {
+    display: block;
+    margin: 5px 0;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    margin-left: 20px;
+}
+
+/* HERO */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.hero img {
+    width: 200px;
+    border-radius: 10px;
+}
+
+/* PRODUCTS */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card h4 {
+    margin: 10px 0;
+}
+
+.price {
+    font-weight: bold;
+}
+
+button {
+    background: black;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* CATEGORY */
+.categories {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.category {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 40px;
+    padding: 20px;
+    background: white;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px){
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h1>PantryPal</h1>
+    <div class="nav-links">
+        <span>Produce</span>
+        <span>Dairy</span>
+        <span>Pantry</span>
+        <span>Cart 🛒</span>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h3>Category</h3>
+    <label><input type="checkbox"> Produce</label>
+    <label><input type="checkbox"> Dairy</label>
+    <label><input type="checkbox"> Pantry</label>
+
+    <h3>Price</h3>
+    <input type="range" min="0" max="100">
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+        <div>
+            <h2>Spring Fresh Deals</h2>
+            <p>Up to 30% off fresh produce</p>
+            <button>Shop Now</button>
+        </div>
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e">
+    </div>
+
+    <!-- PRODUCTS -->
+    <h3 style="margin-top:20px;">Recommended</h3>
+    <div class="products" id="productList"></div>
+
+    <!-- CATEGORIES -->
+    <h3 style="margin-top:20px;">Top Categories</h3>
+    <div class="categories">
+        <div class="category">Produce</div>
+        <div class="category">Dairy</div>
+        <div class="category">Pantry</div>
+    </div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 PantryPal
+</div>
+
+<script>
+const products = [
+    {
+        name: "Apples",
+        price: "$2.49",
+        img: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce"
+    },
+    {
+        name: "Milk",
+        price: "$3.19",
+        img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"
+    },
+    {
+        name: "Oats",
+        price: "$6.49",
+        img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd"
+    },
+    {
+        name: "Spinach",
+        price: "$4.29",
+        img: "https://images.unsplash.com/photo-1582515073490-dc3c9d62b93c"
+    }
+];
+
+const container = document.getElementById("productList");
+
+products.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+        <img src="${p.img}">
+        <h4>${p.name}</h4>
+        <p class="price">${p.price}</p>
+        <button onclick="addToCart('${p.name}')">Add</button>
+    `;
+
+    container.appendChild(card);
+});
+
+function addToCart(name){
+    alert(name + " added to cart!");
+}
+</script>
+
+</body>
+</html>
