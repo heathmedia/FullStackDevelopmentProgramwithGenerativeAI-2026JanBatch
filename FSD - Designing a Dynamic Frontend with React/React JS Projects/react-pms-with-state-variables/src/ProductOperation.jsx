@@ -262,62 +262,62 @@ import { useState } from "react";
 
 function ProductOperation() {
 
-const [products,setProducts]=useState([]);
-const [product,setProduct]=useState({pid:"",pname:"",price:"",url:""})
-const [buttonMsg,setButtonMsg]=useState("Add Product");
-const [idFlag,setIdFlag]=useState(false);
+const emptyProduct = { pid: "", pname: "", price: "", url: "" };
+const [products, setProducts] = useState([]);
+const [product, setProduct] = useState(emptyProduct);
+const [buttonMsg, setButtonMsg] = useState("Add Product");
+const [idFlag, setIdFlag] = useState(false);
 
-let storeOrUpdateProduct = (event)=> {
-event.preventDefault();
+const resetProduct = () => setProduct(emptyProduct);
 
-if(product.pid=="" || product.pname=="" || product.price=="" || product.url==""){
-alert("Please enter all field")
-return;
+const storeOrUpdateProduct = (event) => {
+    event.preventDefault();
+
+const hasEmptyField = Object.values(product).some((value) => !value.trim());
+
+if (hasEmptyField) {
+    alert("Please enter all fields");
+    return;
 }
 
-if(buttonMsg==="Add Product"){
+const isAddMode = buttonMsg === "Add Product";
 
-let isPresent = products.find(p=>p.pid===product.pid);
+if (isAddMode) {
+    const idExists = products.some((item) => item.pid === product.pid);
 
-if(isPresent===undefined){
-setProducts([...products,product]);
-alert("Product added successfully")
-}else{
-alert("Product id must be unique")
+    if (idExists) {
+        alert("Product id must be unique");
+        return;
+    }
+
+    setProducts((prevProducts) => [...prevProducts, product]);
+    alert("Product added successfully");
+} else {
+    setProducts((prevProducts) =>
+        prevProducts.map((item) =>
+            item.pid === product.pid
+                ? { ...item, pname: product.pname, price: product.price, url: product.url }
+                : item
+        )
+    );
+
+    setButtonMsg("Add Product");
+    setIdFlag(false);
 }
 
-}else{
+resetProduct();
+};
 
-let productIndex = products.findIndex(p=>p.pid===product.pid);
-let tempProducts = products.slice();
+const deleteProduct = (pid) => {
+    setProducts((prevProducts) => prevProducts.filter((p) => p.pid !== pid));
+    alert("Product deleted successfully");
+};
 
-tempProducts[productIndex].pname=product.pname
-tempProducts[productIndex].price=product.price
-tempProducts[productIndex].url=product.url
-
-setProducts(tempProducts);
-
-setButtonMsg("Add Product");
-setIdFlag(false);
-}
-
-setProduct({pid:"",pname:"",price:"",url:""})
-}
-
-let deleteProduct = (pid)=> {
-
-let filterProducts = products.filter(p=>p.pid!==pid);
-setProducts(filterProducts);
-
-alert("Product deleted successfully")
-}
-
-let setToUpdateProduct = (updateProduct)=> {
-
-setProduct(updateProduct);
-setButtonMsg("Update Product");
-setIdFlag(true)
-}
+const setToUpdateProduct = (updateProduct) => {
+    setProduct(updateProduct);
+    setButtonMsg("Update Product");
+    setIdFlag(true);
+};
 
 return(
 

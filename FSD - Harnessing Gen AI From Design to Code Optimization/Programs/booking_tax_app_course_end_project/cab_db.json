@@ -1,0 +1,45 @@
+{
+  "cabs": [
+    {
+      "id": "1",
+      "name": "Mini Cab",
+      "type": "Mini",
+      "pricePerKm": 10,
+      "driver": "Ravi",
+      "available": true,
+      "vehicleNumber": "DL1AB1234",
+      "phone": "+91-9876543210"
+    },
+    {
+      "id": "2",
+      "name": "Sedan",
+      "type": "Sedan",
+      "pricePerKm": 15,
+      "driver": "Suresh",
+      "available": true,
+      "vehicleNumber": "DL1AB5678",
+      "phone": "+91-9123456780"
+    },
+    {
+      "id": "3",
+      "name": "SUV",
+      "type": "SUV",
+      "pricePerKm": 20,
+      "driver": "Anita",
+      "available": false,
+      "vehicleNumber": "DL1AB9012",
+      "phone": "+91-9988776655"
+    }
+  ],
+  "rides": [
+    {
+      "id": "2942",
+      "cabId": "1",
+      "pickup": "Abc",
+      "drop": "Xyz",
+      "distance": 100,
+      "status": "Booked"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
