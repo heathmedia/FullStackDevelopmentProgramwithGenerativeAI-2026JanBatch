@@ -18,3 +18,7 @@ console.log(mm.get(1000)); // undefined
 console.log(mm.has(100)); // true
 console.log(mm.has(1000)); // false
 console.log(mm.size);
+// retrieving keys
+for(let key of mm.keys()){
+    console.log("Key is: "+key+" Value is "+mm.get(key));
+}
